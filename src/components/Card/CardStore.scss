@@ -4,6 +4,19 @@
   font-size: 15px;
 }
 
+.block-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 230px;
+  min-height: 230px;
+}
+.img-current {
+  img {
+    max-height: 230px;
+  }
+}
+
 .product-price-block {
   .price-normal {
     font-size: 20px;
@@ -18,4 +31,8 @@
       font-weight: 400;
     }
   }
+}
+
+.ant-card-body {
+  padding: 10px 24px 14px 24px;
 }

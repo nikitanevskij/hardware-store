@@ -59,7 +59,9 @@ export const CardStore = ({ items }) => {
         }
         actions={location.pathname !== '/favorites' ? actionsCard : [actionsCard[1]]}
       >
-        <Image src={items.image} />
+        <div className="block-img">
+          <Image src={items.image} rootClassName="img-current" />
+        </div>
 
         <p className="block_label">{items.label}</p>
 
