@@ -5,6 +5,7 @@ import { Spin } from 'antd';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { fetchTools } from '../../redux/fetchToolsSlice';
+import { Empty } from 'antd';
 
 export const HomeStore = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +20,32 @@ export const HomeStore = () => {
   const renderItems = location.pathname !== '/favorites' ? tools : favoriteTools;
 
   if (loading) {
-    return <Spin size="large" />;
+    return (
+      <Spin
+        size="large"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '90vh',
+        }}
+      />
+    );
+  }
+
+  if (!renderItems.length) {
+    return (
+      <Empty
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '90vh',
+        }}
+        description={false}
+      />
+    );
   }
   return (
     <div className="block_items">

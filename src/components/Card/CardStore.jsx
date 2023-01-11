@@ -59,13 +59,17 @@ export const CardStore = ({ items }) => {
         }
         actions={location.pathname !== '/favorites' ? actionsCard : [actionsCard[1]]}
       >
-        <div className="block_wrapper">
-          <Image src={items.image} />
+        <Image src={items.image} />
+
+        <p className="block_label">{items.label}</p>
+
+        <div className="product-price-block">
+          <span className="price-normal">
+            {items.price}
+            <small> р.</small>
+            <span className="product-unit"> / шт</span>
+          </span>
         </div>
-
-        <div className="block_label">{items.label}</div>
-
-        <p>{items.price}</p>
       </Card>
     </>
   );

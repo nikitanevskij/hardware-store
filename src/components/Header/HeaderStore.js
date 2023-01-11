@@ -15,7 +15,7 @@ export const HeaderStore = () => {
   ];
 
   return (
-    <>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <h2
         style={{ fontSize: '24px', color: 'white', fontWeight: '700', cursor: 'pointer' }}
         onClick={() => dispatch(fetchTools())}
@@ -24,6 +24,6 @@ export const HeaderStore = () => {
       </h2>
 
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']} items={menuItems} />
-    </>
+    </div>
   );
 };

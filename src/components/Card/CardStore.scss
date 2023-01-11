@@ -1,7 +1,21 @@
-.block_wrapper {
-  min-height: 240px;
+.block_label {
+  margin-top: 5px;
+  min-height: 80px;
+  font-size: 15px;
 }
 
-.block_label {
-  min-height: 80px;
+.product-price-block {
+  .price-normal {
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 500;
+    vertical-align: bottom;
+    small {
+      font-size: 14px;
+    }
+    span {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
 }
