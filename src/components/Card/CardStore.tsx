@@ -2,24 +2,29 @@ import React from 'react';
 import { Card, Image, message, Popconfirm, Tooltip } from 'antd';
 import { HeartFilled, DeleteOutlined, HeartOutlined, ShoppingOutlined } from '@ant-design/icons';
 import './CardStore.scss';
-import { useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import { deleteItem } from '../../redux/fetchToolsSlice';
 import { useSelector } from 'react-redux';
 import { addFavorite, deleteFavorite } from '../../redux/fetchFavoritesSlice';
 import { useLocation } from 'react-router-dom';
+import { TFetchTools } from '../../redux/fetchToolsSlice';
 
-export const CardStore = ({ items }) => {
+type TCardStoreProps = {
+  items: TFetchTools;
+};
+
+export const CardStore: React.FC<TCardStoreProps> = ({ items }) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const { favoriteTools } = useSelector((state) => state.fetchFavoritesSlice);
+  const { favoriteTools } = useSelector((state: RootState) => state.fetchFavoritesSlice);
 
-  const confirm = (id) => {
+  const confirm = (id: string) => {
     dispatch(deleteItem(id));
     dispatch(deleteFavorite(id));
     message.success('Успешно удалено');
   };
 
-  const isItemAddedToFavorite = (id) => favoriteTools.some((obj) => obj.id === id);
+  const isItemAddedToFavorite = (id: string) => favoriteTools.some((obj) => obj.id === id);
 
   const actionsCard = [
     <Popconfirm

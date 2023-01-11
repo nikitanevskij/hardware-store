@@ -3,31 +3,35 @@ import { useSelector } from 'react-redux';
 import { CardStore } from '../Card/CardStore';
 import { Spin } from 'antd';
 import { useLocation } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import { fetchTools } from '../../redux/fetchToolsSlice';
 import { Empty } from 'antd';
 
-export const HomeStore = () => {
-  const dispatch = useAppDispatch();
+export const HomeStore: React.FC = () => {
   const location = useLocation();
-  const { tools, loading } = useSelector((state) => state.fetchToolsSlice);
-  const { favoriteTools } = useSelector((state) => state.fetchFavoritesSlice);
+  const dispatch = useAppDispatch();
+
+  const { tools, loading } = useSelector((state: RootState) => state.fetchToolsSlice);
+  const { favoriteTools } = useSelector((state: RootState) => state.fetchFavoritesSlice);
+
+  const renderItems = location.pathname !== '/favorites' ? tools : favoriteTools;
 
   React.useEffect(() => {
     dispatch(fetchTools());
   }, [dispatch]);
 
-  const renderItems = location.pathname !== '/favorites' ? tools : favoriteTools;
-
   if (loading) {
     return (
       <Spin
+        tip="Loading..."
         size="large"
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           height: '90vh',
+          flexDirection: 'column',
+          rowGap: '15px',
         }}
       />
     );
@@ -42,8 +46,10 @@ export const HomeStore = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '90vh',
+          flexDirection: 'column',
+          rowGap: '15px',
         }}
-        description={false}
+        description={'Ничего не добавлено'}
       />
     );
   }

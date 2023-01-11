@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 
 const { Content, Header } = Layout;
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ paddingInline: 0 }}>
