@@ -1,12 +1,13 @@
 import React from 'react';
 import { Card, Image, message, Popconfirm, Tooltip } from 'antd';
 import { HeartFilled, DeleteOutlined, HeartOutlined, ShoppingOutlined } from '@ant-design/icons';
-import './CardContent.scss';
+import './CardStore.scss';
 import { useAppDispatch } from '../../redux/store';
 import { deleteItem } from '../../redux/fetchToolsSlice';
 import { useSelector } from 'react-redux';
 import { addFavorite, deleteFavorite } from '../../redux/fetchFavoritesSlice';
-export const CardContent = ({ items }) => {
+
+export const CardStore = ({ items }) => {
   const dispatch = useAppDispatch();
   const { favoriteTools } = useSelector((state) => state.fetchFavoritesSlice);
 
