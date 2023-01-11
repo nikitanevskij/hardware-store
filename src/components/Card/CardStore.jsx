@@ -6,18 +6,34 @@ import { useAppDispatch } from '../../redux/store';
 import { deleteItem } from '../../redux/fetchToolsSlice';
 import { useSelector } from 'react-redux';
 import { addFavorite, deleteFavorite } from '../../redux/fetchFavoritesSlice';
+import { useLocation } from 'react-router-dom';
 
 export const CardStore = ({ items }) => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const { favoriteTools } = useSelector((state) => state.fetchFavoritesSlice);
 
-  const confirm = (key) => {
-    dispatch(deleteItem(key));
+  const confirm = (id) => {
+    dispatch(deleteItem(id));
+    dispatch(deleteFavorite(id));
     message.success('Успешно удалено');
   };
 
-  const isItemAddedToFavorite = (key) => favoriteTools.some((obj) => obj.key === key);
+  const isItemAddedToFavorite = (id) => favoriteTools.some((obj) => obj.id === id);
 
+  const actionsCard = [
+    <Popconfirm
+      title="Подвердить удаление?"
+      onConfirm={() => confirm(items.id)}
+      okText="Да"
+      cancelText="Нет"
+    >
+      <DeleteOutlined key="delete" style={{ fontSize: '20px' }} />
+    </Popconfirm>,
+    <Tooltip title="underway...">
+      <ShoppingOutlined key="ellipsis" style={{ fontSize: '20px' }} />
+    </Tooltip>,
+  ];
   return (
     <>
       <Card
@@ -26,10 +42,10 @@ export const CardStore = ({ items }) => {
         hoverable
         extra={
           <>
-            {isItemAddedToFavorite(items.key) ? (
+            {isItemAddedToFavorite(items.id) ? (
               <HeartFilled
                 style={{ color: '#FF4343', fontSize: '20px' }}
-                onClick={() => dispatch(deleteFavorite(items.key))}
+                onClick={() => dispatch(deleteFavorite(items.id))}
               />
             ) : (
               <Tooltip title="Добавить в избранное">
@@ -41,19 +57,7 @@ export const CardStore = ({ items }) => {
             )}
           </>
         }
-        actions={[
-          <>
-            <Popconfirm
-              title="Подвердить удаление?"
-              onConfirm={() => confirm(items.key)}
-              okText="Да"
-              cancelText="Нет"
-            >
-              <DeleteOutlined key="delete" style={{ fontSize: '20px' }} />
-            </Popconfirm>
-          </>,
-          <ShoppingOutlined key="ellipsis" style={{ fontSize: '20px' }} />,
-        ]}
+        actions={location.pathname !== '/favorites' ? actionsCard : [actionsCard[1]]}
       >
         <div className="block_wrapper">
           <Image src={items.image} />

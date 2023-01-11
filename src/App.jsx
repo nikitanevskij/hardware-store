@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 import { HeaderStore } from './components/Header/HeaderStore';
 import { HomeStore } from './components/Home/HomeStore';
 import { Routes, Route } from 'react-router-dom';
+
 const { Content, Header } = Layout;
 
 export const App = () => {
