@@ -5,12 +5,12 @@ export type TFetchTools = Record<string, string>;
 
 interface IToolsSliceState {
   tools: TFetchTools[];
-  loading: boolean;
+  loadingTools: boolean;
 }
 
 const initialState: IToolsSliceState = {
   tools: [],
-  loading: true,
+  loadingTools: true,
 };
 
 export const fetchTools = createAsyncThunk<TFetchTools[]>('tools/fetchToolsStatus', async () => {
@@ -24,25 +24,25 @@ export const fetchToolsSlice = createSlice({
   name: 'tools',
   initialState,
   reducers: {
-    deleteItem: (state, action: PayloadAction<string>) => {
+    deleteItemTools: (state, action: PayloadAction<string>) => {
       state.tools = state.tools.filter((item) => item.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTools.pending, (state) => {
       state.tools = [];
-      state.loading = true;
+      state.loadingTools = true;
     });
     builder.addCase(fetchTools.fulfilled, (state, action) => {
       state.tools.push(...action.payload);
-      state.loading = false;
+      state.loadingTools = false;
     });
     builder.addCase(fetchTools.rejected, (state) => {
-      state.loading = true;
+      state.loadingTools = true;
     });
   },
 });
 
-export const { deleteItem } = fetchToolsSlice.actions;
+export const { deleteItemTools } = fetchToolsSlice.actions;
 
 export default fetchToolsSlice.reducer;

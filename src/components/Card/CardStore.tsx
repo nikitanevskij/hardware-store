@@ -6,21 +6,24 @@ import { HeartFilled, DeleteOutlined, HeartOutlined, ShoppingOutlined } from '@a
 
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
-import { deleteItem } from '../../redux/fetchToolsSlice';
+import { deleteItemTools } from '../../redux/fetchToolsSlice';
 import { TFetchTools } from '../../redux/fetchToolsSlice';
 import { addFavorite, deleteFavorite } from '../../redux/fetchFavoritesSlice';
+import { deleteItemProduct } from '../../redux/fetchProductBankSlice';
 
 type TCardStoreProps = {
   items: TFetchTools;
+  toggle: Boolean;
 };
 
-export const CardStore: React.FC<TCardStoreProps> = ({ items }) => {
+export const CardStore: React.FC<TCardStoreProps> = ({ items, toggle }) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { favoriteTools } = useSelector((state: RootState) => state.fetchFavoritesSlice);
 
   const confirm = () => {
-    dispatch(deleteItem(items.id));
+    const selectDispatch = toggle ? deleteItemProduct(items.id) : deleteItemTools(items.id);
+    dispatch(selectDispatch);
     dispatch(deleteFavorite(items.id));
     message.success('Успешно удалено');
   };
@@ -70,11 +73,17 @@ export const CardStore: React.FC<TCardStoreProps> = ({ items }) => {
         <p className="product-card-label">{items.label}</p>
 
         <div className="product-card-price-block">
-          <span className="product-card-price">
-            {items.price}
-            <small> р.</small>
-            <span> / шт</span>
-          </span>
+          {toggle ? (
+            <>
+              Кэшбэк от <span className="product-card-price"> {items.cashback}</span>%
+            </>
+          ) : (
+            <span className="product-card-price">
+              {items.price}
+              <small> р.</small>
+              <span> / шт</span>
+            </span>
+          )}
         </div>
       </Card>
     </>

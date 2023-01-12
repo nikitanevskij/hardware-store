@@ -1,22 +1,29 @@
 import React from 'react';
 import './HeaderStore.scss';
 import { Menu, MenuProps } from 'antd';
-import { BankOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../redux/store';
 import { fetchTools } from '../../redux/fetchToolsSlice';
+import { fetchProducts } from '../../redux/fetchProductBankSlice';
+import { resetFavorite } from '../../redux/fetchFavoritesSlice';
 
-export const HeaderStore: React.FC = () => {
+type THeaderStoreProps = {
+  toggle: Boolean;
+};
+
+export const HeaderStore: React.FC<THeaderStoreProps> = ({ toggle }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const selectDispatch = toggle ? fetchProducts() : fetchTools();
+  const headerLogo = toggle ? 'BANK' : 'HARDWARE STORE';
 
   const [selectKeyMenu, setSelectKeyMenu] = React.useState(['home']);
 
   const menuItems: MenuProps['items'] = [
     { key: 'home', label: <Link to="/">Главная</Link> },
     { key: 'favorites', label: <Link to="/favorites">Избранное</Link> },
-    { key: 'joke', label: 'Alfa joke', icon: <BankOutlined /> },
   ];
 
   const onChangeKeyMenu: MenuProps['onClick'] = (e) => {
@@ -26,13 +33,14 @@ export const HeaderStore: React.FC = () => {
   const onRefresh = () => {
     navigate('/');
     setSelectKeyMenu(['home']);
-    dispatch(fetchTools());
+    dispatch(resetFavorite());
+    dispatch(selectDispatch);
   };
 
   return (
     <div className="header-row">
       <h2 className="header-logo" onClick={onRefresh}>
-        HARDWARE STORE
+        {headerLogo}
       </h2>
 
       <Menu
