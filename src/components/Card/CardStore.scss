@@ -1,24 +1,24 @@
-.block_label {
+.product-card-label {
   margin-top: 5px;
   min-height: 80px;
   font-size: 15px;
 }
 
-.block-img {
+.product-card-wrapper-img {
   display: flex;
   align-items: center;
   justify-content: center;
   max-height: 230px;
   min-height: 230px;
 }
-.img-current {
+.product-card-img {
   img {
     max-height: 230px;
   }
 }
 
-.product-price-block {
-  .price-normal {
+.product-card-price-block {
+  .product-card-price {
     font-size: 20px;
     line-height: 23px;
     font-weight: 500;

@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.scss';
 import { Layout } from 'antd';
-import { HeaderStore } from './components/Header/HeaderStore';
-import { HomeStore } from './components/Home/HomeStore';
 import { Routes, Route } from 'react-router-dom';
+
+import { HomeStore } from './components/Home/HomeStore';
+import { HeaderStore } from './components/Header/HeaderStore';
 
 const { Content, Header } = Layout;
 
 export const App: React.FC = () => {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Header style={{ paddingInline: 0 }}>
+    <Layout className="layout">
+      <Header className="header">
         <div className="container">
           <HeaderStore />
         </div>

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Menu } from 'antd';
+import './HeaderStore.scss';
+import { Menu, MenuProps } from 'antd';
 import { BankOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from '../../redux/store';
 import { fetchTools } from '../../redux/fetchToolsSlice';
-import { useNavigate } from 'react-router-dom';
-import type { MenuProps } from 'antd';
 
 export const HeaderStore: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [selectMenu, setSelectMenu] = React.useState(['home']);
+  const [selectKeyMenu, setSelectKeyMenu] = React.useState(['home']);
 
   const menuItems: MenuProps['items'] = [
     { key: 'home', label: <Link to="/">Главная</Link> },
@@ -19,20 +19,19 @@ export const HeaderStore: React.FC = () => {
     { key: 'joke', label: 'Alfa joke', icon: <BankOutlined /> },
   ];
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    setSelectMenu(e.keyPath);
+  const onChangeKeyMenu: MenuProps['onClick'] = (e) => {
+    setSelectKeyMenu(e.keyPath);
+  };
+
+  const onRefresh = () => {
+    navigate('/');
+    setSelectKeyMenu(['home']);
+    dispatch(fetchTools());
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <h2
-        style={{ fontSize: '24px', color: 'white', fontWeight: '700', cursor: 'pointer' }}
-        onClick={() => {
-          navigate('/');
-          setSelectMenu(['home']);
-          dispatch(fetchTools());
-        }}
-      >
+    <div className="header-row">
+      <h2 className="header-logo" onClick={onRefresh}>
         HARDWARE STORE
       </h2>
 
@@ -40,8 +39,9 @@ export const HeaderStore: React.FC = () => {
         theme="dark"
         mode="horizontal"
         items={menuItems}
-        selectedKeys={selectMenu}
-        onClick={onClick}
+        onClick={onChangeKeyMenu}
+        className="header-nav-list"
+        selectedKeys={selectKeyMenu}
       />
     </div>
   );

@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { CardStore } from '../Card/CardStore';
-import { Spin } from 'antd';
+import './HomeStore.scss';
+import { Spin, Empty } from 'antd';
 import { useLocation } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { fetchTools } from '../../redux/fetchToolsSlice';
-import { Empty } from 'antd';
+
+import { CardStore } from '../Card/CardStore';
 
 export const HomeStore: React.FC = () => {
   const location = useLocation();
@@ -21,40 +23,20 @@ export const HomeStore: React.FC = () => {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      <Spin
-        tip="Loading..."
-        size="large"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '90vh',
-          flexDirection: 'column',
-          rowGap: '15px',
-        }}
-      />
-    );
+    return <Spin tip="Загрузка..." size="large" className="center-alignment" />;
   }
 
   if (!renderItems.length) {
     return (
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '90vh',
-          flexDirection: 'column',
-          rowGap: '15px',
-        }}
+        className="center-alignment"
         description={'Ничего не добавлено'}
       />
     );
   }
   return (
-    <div className="block_items">
+    <div className="block-home">
       {renderItems.map((item, index) => (
         <CardStore items={item} key={index} />
       ))}

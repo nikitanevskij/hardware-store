@@ -1,0 +1,21 @@
+.header-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  @media (max-width: 650px) {
+    font-size: 20px;
+  }
+}
+
+.header-nav-list {
+  flex: auto;
+  min-width: 0;
+  justify-content: flex-end;
+  font-size: 16px;
+}
