@@ -22,7 +22,7 @@ export const HeaderStore: React.FC<THeaderStoreProps> = ({ toggle }) => {
   const [selectKeyMenu, setSelectKeyMenu] = React.useState(['home']);
 
   const menuItems: MenuProps['items'] = [
-    { key: 'home', label: <Link to="/hardware-store">Главная</Link> },
+    { key: 'home', label: <Link to="/hardware-store/">Главная</Link> },
     { key: 'favorites', label: <Link to="/favorites">Избранное</Link> },
   ];
 
@@ -31,7 +31,7 @@ export const HeaderStore: React.FC<THeaderStoreProps> = ({ toggle }) => {
   };
 
   const onRefresh = () => {
-    navigate('/hardware-store');
+    navigate('/hardware-store/');
     setSelectKeyMenu(['home']);
     dispatch(resetFavorite());
     dispatch(selectDispatch);
