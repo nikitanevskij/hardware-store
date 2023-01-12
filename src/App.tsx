@@ -34,11 +34,11 @@ export const App: React.FC = () => {
               checkedChildren="BANK"
               unCheckedChildren="STORE"
               onChange={changeTypeCard}
-              disabled={location.pathname !== '/'}
+              disabled={location.pathname !== '*'}
             />
           </div>
           <Routes>
-            <Route path="/" element={<HomeStore toggle={toggle} />} />
+            <Route path="*" element={<HomeStore toggle={toggle} />} />
             <Route path="/favorites" element={<HomeStore toggle={toggle} />} />
           </Routes>
         </div>
