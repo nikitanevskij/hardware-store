@@ -31,7 +31,7 @@ export const HeaderStore: React.FC<THeaderStoreProps> = ({ toggle }) => {
   };
 
   const onRefresh = () => {
-    navigate('/');
+    navigate('/hardware-store');
     setSelectKeyMenu(['home']);
     dispatch(resetFavorite());
     dispatch(selectDispatch);
