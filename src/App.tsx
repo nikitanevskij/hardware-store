@@ -34,7 +34,7 @@ export const App: React.FC = () => {
               checkedChildren="BANK"
               unCheckedChildren="STORE"
               onChange={changeTypeCard}
-              disabled={location.pathname !== '*'}
+              disabled={location.pathname !== '/'}
             />
           </div>
           <Routes>
