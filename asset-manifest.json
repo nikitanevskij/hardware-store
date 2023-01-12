@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hardware-store/static/css/main.719c1067.css",
+    "main.js": "/hardware-store/static/js/main.15b162cf.js",
+    "index.html": "/hardware-store/index.html",
+    "main.719c1067.css.map": "/hardware-store/static/css/main.719c1067.css.map",
+    "main.15b162cf.js.map": "/hardware-store/static/js/main.15b162cf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.719c1067.css",
+    "static/js/main.15b162cf.js"
+  ]
+}
