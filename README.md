@@ -5,7 +5,8 @@
 ## 🛠 Технологии:
 
 - **ReactJS 18**
-- **TypeScript\*\***Redux Toolkit\*\*
+- **TypeScript**
+- **Redux Toolkit**
 - **React Router v6**
 - **Axios**
 - **AntDesign**
